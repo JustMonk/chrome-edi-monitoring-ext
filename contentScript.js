@@ -57,6 +57,7 @@ queryScript();
 
 //проверка по header-у (фикс возвратов)
 setInterval(() => {
+   if (!document.querySelector('#message-monitoring-table-header tr th')) return;
    if (document.querySelector('#message-monitoring-table-header tr th').innerText != 'Поставщик') {
       queryScript();
    } else {
@@ -74,6 +75,13 @@ function queryScript() {
          queryScript();
       }, 100);
       return;
+   }
+
+   //table header offset
+   if (document.querySelector('#message-monitoring-table-header tr th') && document.querySelector('#message-monitoring-table-header tr th').innerText != 'Поставщик') {
+      let th = document.createElement('th');
+      th.innerText = 'Поставщик';
+      document.querySelector('#message-monitoring-table-header tr').insertAdjacentElement('afterbegin', th);
    }
 
    // watch for a specific class change
@@ -94,7 +102,7 @@ function queryScript() {
       //type="button" class="_3ICa5rmHWJzYEfRRG2wrUN f8sC_jmf4Z2WdSVA9kF7m _2lPAIEmpHyhLImZND3S6wK" tabindex="0" style="border-radius: 1px;"
       button.className = 'ext-button';
 
-      td.style = 'display: flex; align-items: center;';
+      td.style = 'display: flex; align-items: center; padding-left: 1px;';
       td.append(button);
       row.insertAdjacentElement('afterbegin', td);
       var xhr = new XMLHttpRequest();
