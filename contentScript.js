@@ -102,8 +102,11 @@ function queryScript() {
       //type="button" class="_3ICa5rmHWJzYEfRRG2wrUN f8sC_jmf4Z2WdSVA9kF7m _2lPAIEmpHyhLImZND3S6wK" tabindex="0" style="border-radius: 1px;"
       button.className = 'ext-button';
 
-      td.style = 'display: flex; align-items: center; padding-left: 1px;';
-      td.append(button);
+      td.style = 'padding-left: 1px;';
+      let buttonWrapper = document.createElement('div');
+      buttonWrapper.style = 'display: flex; align-items: center; height: 100%;';
+      buttonWrapper.append(button);
+      td.append(buttonWrapper);
       row.insertAdjacentElement('afterbegin', td);
       var xhr = new XMLHttpRequest();
       xhr.open("GET", `https://edi.kontur.ru/internal-api/message-monitoring-2/card/new/${docId}`, true);
